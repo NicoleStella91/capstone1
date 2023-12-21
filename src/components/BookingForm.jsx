@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom';
 
 function BookingForm({ availableTimes, setAvailableTimes }) {
     const [fName, setFName] = useState("")
@@ -6,6 +7,7 @@ function BookingForm({ availableTimes, setAvailableTimes }) {
     const [time, setTime] = useState("")
     const [guests, setGuests] = useState(1)
     const [occasion, setOccasion] = useState("")
+    const navigate = useNavigate();
 
     const initializeTimes = async () => {
         try {
@@ -25,6 +27,11 @@ function BookingForm({ availableTimes, setAvailableTimes }) {
             console.error("Error updating available times:", error);
         }
     };
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        navigate(`/confirmation?fName=${fName}&date=${date}&time=${time}&guests=${guests}&occasion=${occasion}`);
+    }
     
     return (
         <form>
@@ -60,6 +67,7 @@ function BookingForm({ availableTimes, setAvailableTimes }) {
                     <option value="Birthday">Birthday</option>
                 </select>
             </div>
+            <button onClick={handleSubmit}>Make Your Reservation</button>
         </form>
     )
 }
