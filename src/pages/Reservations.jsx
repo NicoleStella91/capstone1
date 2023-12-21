@@ -1,9 +1,11 @@
+import { useState } from "react"
 import restaurant from "../../public/assets/restaurant.jpg"
 import Footer from "../components/Footer"
 import Nav from "../components/Nav"
 import BookingForm from "../components/BookingForm"
 
 function Reservations() {
+    const [availableTimes, setAvailableTimes] = useState(['17:00', '18:00', '19:00', '20:00', '21:00', '22:00']);
     return (
         <>
             <Nav />
@@ -13,7 +15,10 @@ function Reservations() {
                     <img src={restaurant} alt="Little Lemon" />
 
                 </section>
-                <BookingForm />
+                <BookingForm 
+                    availableTimes={availableTimes}
+                    setAvailableTimes={setAvailableTimes} 
+                />
             </section>
             <Footer />
         </>
