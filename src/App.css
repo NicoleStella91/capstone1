@@ -1,42 +1,418 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 20px;
+}
+
+.bar {
+  cursor: pointer;
+  display: none;
+}
+
+@media screen and (max-width: 768px){
+  .bar {
+    display: block;
+  }
+}
+
+.navbar--links {
+  display: flex;
+  justify-content: center;
+  font-family: 'Karla', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
   text-align: center;
+  text-transform: uppercase;
+  color: #000000;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.navbar--links > li {
+  margin: auto 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 768px) {
+  .navbar--links {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      top: 80px; 
+      right: 0;
+      width: 100%;
+      background-color: #F4CE14;
+      transition: all 0.3s ease-in-out;
+      padding: 20px;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .navbar--links.visible {
+      display: flex; 
   }
 }
 
-.card {
-  padding: 2em;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+ul {
+  list-style: none;
+}
+
+header > img {
+  margin-left: 20px;
+}
+
+h1 {
+  font-family: 'Markazi Text', serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 77px;
+  text-align: center;
+  color: #000000;
+}
+
+.hero--text > h1 {
+  color: #F4CE14;
+}
+
+h2 {
+  font-family: 'Markazi Text', serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 77px;
+  text-align: center;
+  color: #000000;
+}
+
+h3 {
+  font-family: 'Markazi Text', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+  color: #000000;
+}
+
+.hero--text > h3 {
+  color: #FFFFFF;
+}
+
+h4 {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+h5 {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+}
+
+p {
+  font-family: 'Karla', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #FFFFFF;
+}
+
+button {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background: #F4CE14;
+  border-radius: 8px;
+  font-family: 'Karla', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  color: #000000;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.hero {
+  background: #495E57;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  max-width: 100%;
+}
+
+.hero--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero--text > p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 900px) {
+  .hero--text {
+      justify-content: flex-start;
+      align-items: flex-start;
+      max-width: 30%;
+      margin: 40px;
+  }
+
+  .hero--text > p {
+      max-width: 50%;
+      text-align: left;
+  }
+}
+
+.image {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 8px;
+  height: 392px;
+  width: auto;
+}
+
+.specials--section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.specials--header {
+  justify-content: space-around;
+  margin: 30px auto;
+}
+
+.special--card {
+  width: 387px;
+  height: 534px;
+  margin: 40px 20px;
+  background: #495E57;
+  border-radius: 0 8px;
+}
+
+.special--img {
+  width: 100%;
+}
+
+.special--title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 30px;
+  flex-wrap: wrap;
+}
+
+.special--title > span {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: right;
+  color: #F4CE14;
+}
+
+.special--desc {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
+  margin: 50px 30px;
+}
+
+.simple--link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 70px 30px;
+  cursor: pointer;
+}
+
+.testimonials {
+  background-color: #F4CE14;
+  padding: 50px;
+}
+
+.testimonials--section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.testimonial--card {
+  background-color: #FFFFFF;
+  margin: 30px 30px;
+  width: 387px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+@media screen and (max-width: 700px) {
+  .testimonial--card {
+      align-items: center;
+  }
+}
+
+.testimonial--card > p {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+}
+
+@media screen and (max-width: 700px) {
+  .testimonial--card > p {
+      text-align: center;
+  }
+}
+
+.rating {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 700px) {
+  .rating {
+      justify-content: center;
+  }
+}
+
+.rating > img {
+  margin: 0 20px;
+}
+
+@media screen and (max-width: 700px) {
+  .rating > img {
+      margin: 10px 20px;
+  }
+}
+
+.chicago {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  margin: 20px;
+  max-width: 100%;
+}
+
+.chicago--text > h1, h3, p {
+  text-align: left;
+}
+
+.chicago--text > p {
+  color: #000000;
+  width: 335px;
+}
+
+.chicago--img {
+  max-width: 50vw;
+  margin: 20px;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 30px;
+  background-color: #495E57;
+}
+
+footer > img {
+  max-height: 100px;
+}
+
+.footer--nav {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+}
+
+address {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+}
+
+footer > section {
+  margin: 20px;
+}
+
+form {
+  display: grid;
+  max-width: 200px; 
+  gap: 20px;
+  text-align: center;
+  margin: 20px;
+}
+
+.reservations--wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.reservations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.reservations > h3 {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.reservations > img {
+  width: 200px;
+  border-radius: 8px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
