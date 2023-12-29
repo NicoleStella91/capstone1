@@ -1,75 +1,124 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function BookingForm({ availableTimes, setAvailableTimes }) {
-    const [fName, setFName] = useState("")
-    const [date, setDate] = useState("")
-    const [time, setTime] = useState("")
-    const [guests, setGuests] = useState(1)
-    const [occasion, setOccasion] = useState("")
-    const navigate = useNavigate();
+const BookingForm = () => {
+  const navigate = useNavigate();
 
-    const initializeTimes = async () => {
-        try {
-            const today = new Date().toISOString().split("T")[0];
-            const times = await fetchAPI(today);
-            setAvailableTimes(times);
-        } catch (error) {
-            console.error("Error fetching available times:", error);
-        }
-    };
+  const [formData, setFormData] = useState({
+    Name: '',
+    Phone: '',
+    Date: '',
+    Time: '',
+    Guests: '',
+    Occasion: '',
+  });
 
-    const updateTimes = async (selectedDate) => {
-        try {
-            const times = await fetchAPI(selectedDate);
-            setAvailableTimes(times);
-        } catch (error) {
-            console.error("Error updating available times:", error);
-        }
-    };
+  const simulatedAvailableTimes = ['12:00 PM', '1:00 PM', '7:00 PM', '8:00 PM'];
+  const simulatedOccasionOptions = ['Birthday', 'Anniversary', 'Other'];
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        navigate(`/confirmation?fName=${fName}&date=${date}&time=${time}&guests=${guests}&occasion=${occasion}`);
+  const [availableTimes, setAvailableTimes] = useState([]);
+  const [occasionOptions] = useState(simulatedOccasionOptions);
+  const [formErrors, setFormErrors] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    setAvailableTimes(simulatedAvailableTimes);
+  }, [formData.date]);
+
+  useEffect(() => {
+    const errors = {};
+    if (!formData.Name.trim()) errors.Name = 'Please enter your full name';
+    if (!formData.Phone.trim()) errors.Phone = 'Please enter your phone number';
+    if (!formData.Date) errors.Date = 'Please select a date';
+    if (!formData.Time) errors.Time = 'Please select a time';
+    if (!formData.Guests) errors.Guests = 'Please enter the number of guests';
+    if (!formData.Occasion) errors.Occasion = 'Please select an occasion';
+
+    setFormErrors(errors);
+    setIsFormValid(Object.keys(errors).length === 0);
+  }, [formData]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    if (isFormValid) {
+      console.log('Form data submitted:', formData);
+      navigate('/confirmation');
     }
-    
-    return (
-        <form>
-            <div>
-                <label htmlFor="fullName">Your Full Name:*</label>
-                <input type="text" id="fullName" placeholder="Your Full Name" value={fName} onChange={(e) => setFName(e.target.value)} required />
-            </div>
-            <div>
-                <label htmlFor="date">Choose a date:*</label>
-                <input type="date" id="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-            </div>
-            <div>
-                <label htmlFor="time">Choose a time:*</label>
-                <select id="time" value={time} required>
-                    <option>17:00</option>
-                    <option>18:00</option>
-                    <option>19:00</option>
-                    <option>20:00</option>
-                    <option>21:00</option>
-                    <option>22:00</option>
-                </select>
-            </div>
-            <div>
-                <label htmlFor="guests">Number of Guests:*</label>
-                <input type="number" id="guests" value={guests} min={1} max={10} onChange={(e) => setGuests(e.target.value)} required />
-            </div>
-            <div>
-                <label htmlFor="occasion">Choose Occasion (optional):</label>
-                <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)}>
-                    <option value="Engagement">Engagement</option>
-                    <option value="Wedding">Wedding</option>
-                    <option value="Anniversary">Anniversary</option>
-                    <option value="Birthday">Birthday</option>
-                </select>
-            </div>
-            <button onClick={handleSubmit}>Make Your Reservation</button>
-        </form>
-    )
-}
+  };
 
-export default BookingForm
+  return (
+    <form>
+      {Object.keys(formData).map((fieldName) => (
+        <div key={fieldName}>
+          <label htmlFor={fieldName}>{fieldName}</label>
+          {fieldName === 'Date' ? (
+            <input
+              type="date"
+              id={fieldName}
+              name={fieldName}
+              value={formData[fieldName]}
+              onChange={handleChange}
+            />
+          ) : fieldName === 'Time' ? (
+            <select
+              id={fieldName}
+              name={fieldName}
+              value={formData[fieldName]}
+              onChange={handleChange}
+            >
+              <option value="">Select a time</option>
+              {availableTimes.map((time) => (
+                <option key={time} value={time}>
+                  {time}
+                </option>
+              ))}
+            </select>
+          ) : fieldName === 'Guests' ? (
+            <input
+              type="number"
+              id={fieldName}
+              name={fieldName}
+              value={formData[fieldName]}
+              onChange={handleChange}
+            />
+          ) : fieldName === 'Occasion' ? (
+            <select
+              id={fieldName}
+              name={fieldName}
+              value={formData[fieldName]}
+              onChange={handleChange}
+            >
+              <option value="">Select an occasion</option>
+              {occasionOptions.map((occasion) => (
+                <option key={occasion} value={occasion}>
+                  {occasion}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type="text"
+              id={fieldName}
+              name={fieldName}
+              value={formData[fieldName]}
+              onChange={handleChange}
+            />
+          )}
+          {formErrors[fieldName] && <p style={{ color: 'red' }}>{formErrors[fieldName]}</p>}
+        </div>
+      ))}
+      <button type="button" onClick={handleSubmit} disabled={!isFormValid}>
+        Make your reservation
+      </button>
+    </form>
+  );
+};
+
+export default BookingForm;

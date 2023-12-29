@@ -354,6 +354,7 @@ footer {
   justify-content: space-around;
   padding: 30px;
   background-color: #495E57;
+  margin-top: 30px;
 }
 
 footer > img {
@@ -394,25 +395,18 @@ form {
 
 .reservations--wrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.reservations {
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
-.reservations > h3 {
+.reservations--wrapper > h3 {
   text-align: center;
   margin: 20px auto;
 }
 
-.reservations > img {
-  width: 200px;
+.confirm > img {
+  width: 80%;
   border-radius: 8px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -428,16 +422,30 @@ form {
   margin: 20px;
 }
 
-table {
+button:disabled {
+  background-color: #495E57;
+  color: gray;
+  cursor: auto;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 8px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: 10px;
   font-family: 'Karla';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  text-align: right;
-  color: #000000;
-  background-color:#F4CE14;
-  padding: 30px;
-  margin-bottom: 30px;
-  border-radius: 8px;
+  text-align: center;
+}
+
+label {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
 }
