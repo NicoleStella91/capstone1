@@ -114,7 +114,7 @@ const BookingForm = () => {
           {formErrors[fieldName] && <p style={{ color: 'red' }}>{formErrors[fieldName]}</p>}
         </div>
       ))}
-      <button type="button" onClick={handleSubmit} disabled={!isFormValid}>
+      <button type="button" onClick={handleSubmit} disabled={!isFormValid} aria-aria-label='onClick'>
         Make your reservation
       </button>
     </form>
